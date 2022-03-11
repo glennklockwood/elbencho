@@ -64,7 +64,7 @@ endif
 
 # Dynamic or static linking
 ifeq ($(BUILD_STATIC), 1)
-LDFLAGS            += -static -lncursesw
+LDFLAGS            += -static -lncursesw -ltinfo -ldl
 LDFLAGS_S3_STATIC  += -l curl -l ssl -l crypto -l tls -l z -l nghttp2 -l brotlidec -l brotlicommon \
 	-l dl
 else # dynamic linking
@@ -125,6 +125,8 @@ endif
 # Note: Gets set by CYGWIN_SUPPORT=1, so needs to come after that
 ifeq ($(LIBAIO_SUPPORT), 1)
 CXXFLAGS += -DLIBAIO_SUPPORT
+else
+LDFLAGS_AIO :=
 endif
 
 # syncfs() call support
