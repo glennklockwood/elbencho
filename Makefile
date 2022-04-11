@@ -24,9 +24,9 @@ STRIP              ?= strip
 CXX_FLAVOR         ?= c++14
 
 CXXFLAGS_BOOST     ?= -DBOOST_SPIRIT_THREADSAFE
-LDFLAGS_BOOST      ?= -lboost_program_options -lboost_system -lboost_thread
-LDFLAGS_AIO        ?= -laio
-LDFLAGS_NUMA       ?= -lnuma
+LDFLAGS_BOOST      ?= -L$(BOOST_LIB) -lboost_program_options -lboost_system -lboost_thread
+LDFLAGS_AIO        ?= #-laio
+LDFLAGS_NUMA       ?= #-lnuma
 
 BACKTRACE_SUPPORT  ?= 1
 COREBIND_SUPPORT   ?= 1
@@ -64,7 +64,7 @@ endif
 
 # Dynamic or static linking
 ifeq ($(BUILD_STATIC), 1)
-LDFLAGS            += -static -lncursesw
+LDFLAGS            += -static -lncursesw -ltinfo -ldl
 LDFLAGS_S3_STATIC  += -l curl -l ssl -l crypto -l tls -l z -l nghttp2 -l brotlidec -l brotlicommon \
 	-l dl
 else # dynamic linking

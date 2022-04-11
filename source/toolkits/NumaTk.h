@@ -4,6 +4,7 @@
 #include <cstdarg>
 #include <sched.h>
 #include <string>
+#include <cstring>
 #include "Common.h"
 #include "Logger.h"
 #include "ProgException.h"
